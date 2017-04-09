@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
-
+//@org.springframework.stereotype.Controller
 public class HelloController implements Controller {
 
 	@Override
@@ -19,4 +19,5 @@ public class HelloController implements Controller {
 		return mv;
 	}
 
+	
 }
