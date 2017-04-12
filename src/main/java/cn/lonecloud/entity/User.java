@@ -2,6 +2,7 @@
 
 public class User {
 
+	private String id;
 	private String username;
 	private String password;
 	private int age;
@@ -32,9 +33,17 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password
-				+ ", age=" + age + ", address=" + address + "]";
+		return "User [id=" + id + ", username=" + username + ", password="
+				+ password + ", age=" + age + ", address=" + address + "]";
 	}
-	
+	public User(String id, String username, String password, int age) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.age = age;
+	}
+	public User() {
+	}
 	
 }
