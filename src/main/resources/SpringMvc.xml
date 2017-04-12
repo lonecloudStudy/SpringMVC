@@ -5,7 +5,7 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-
+	<!-- 一般会将这个注解加上去 -->
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler />
 	<!-- 启用spring mvc 注解 -->
@@ -36,5 +36,10 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	 <bean name="/hello" class="cn.lonecloud.controller.HelloController"></bean> 
+	<!-- 配置国际化资源文件 -->
+	<bean id="resourceBundleMessageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="i18n"></property>
+	</bean>
+	<!-- 配置直接转发的页面 -->
+	<mvc:view-controller path="/success" view-name="user"/>
 </beans>
