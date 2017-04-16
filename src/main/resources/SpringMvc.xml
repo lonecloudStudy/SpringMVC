@@ -38,8 +38,13 @@
 	</bean>
 	<!-- 配置国际化资源文件 -->
 	<bean id="resourceBundleMessageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-		<property name="basename" value="i18n"></property>
+		<property name="basename" value="I18n"></property>
 	</bean>
 	<!-- 配置直接转发的页面 -->
 	<mvc:view-controller path="/success" view-name="user"/>
+    <!--自定义视图配置-->
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+        <!--设置优先级 InternalResourceViewResolver为Integer.MAXVALUE-->
+        <property name="order" value="100"/>
+    </bean>
 </beans>
