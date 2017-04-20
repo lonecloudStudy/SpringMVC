@@ -13,7 +13,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="${ctx}/emp/update" method="post">
+<form action="${ctx}/emp/emp" method="post">
     <input type="hidden" name="_method" value="PUT">
     id: <input type="text" name="id" readonly value="${employee.id}"><br>
     名字: <input type="text" name="name" value="${employee.name}"><br>

@@ -14,12 +14,12 @@ import java.util.List;
 public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public void insert(Employee employee) {
-        DBUtils.insertOrUpdate("insert into employee values(?,?,?,?)", employee);
+        DBUtils.insertOrUpdate("insert into employee(id,name,age) values(?,?,?)", employee.getId(), employee.getName(), employee.getAge());
     }
 
     @Override
     public void update(Employee employee) {
-        DBUtils.insertOrUpdate("update employee set name=?,age=? where id=?", employee.getId());
+        DBUtils.insertOrUpdate("update employee set name=?,age=? where id=?", employee.getName(),employee.getAge(),employee.getId());
     }
 
     @Override
@@ -36,9 +36,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<? extends Object> query(Object... args) {
         return args.length != 0 ? DBUtils.query("select id,name,age from employee where id=?", Employee.class, args) : DBUtils.query("select id,name,age from employee", Employee.class);
     }
+
     @Override
     public Employee queryById(String id) {
         List<?> objects = DBUtils.query("select id,name,age from employee where id=?", Employee.class, id);
-        return objects!=null&&objects.size()!=0?(Employee)objects.get(0):null;
+        return objects != null && objects.size() != 0 ? (Employee) objects.get(0) : null;
     }
 }

@@ -14,12 +14,13 @@
     <title>Title</title>
 </head>
 <body>
+<a href="${ctx}/emp/emp">添加</a>
 <table border="1" cellpadding="10" cellspacing="0">
     <tr>
     <th>id</th>
     <th>名字</th>
     <th>年龄</th>
-    <th>操作</th>
+    <th colspan="2">操作</th>
     </tr>
     <tbody>
     <c:forEach items="${employee}" var="e">
@@ -28,7 +29,7 @@
             <td>${e.name}</td>
             <td>${e.age}</td>
             <td><a href="${ctx}/emp/edit/${e.id}">编辑</a></td>
-            <td><button id="delete">删除</button></td>
+            <td><a id="delete" href="javascript:void(0)" go="${ctx}/emp/emp/${e.id}">删除</a></td>
         </tr>
     </c:forEach>
     </tbody>
@@ -37,16 +38,20 @@
         $(function(){
             $("#delete").click(function () {
                 var id=$("#id").text();
+                var href=$(this).attr("go");
                 $.ajax(
                         {
-                            url:"${ctx}/emp/emp",
+                            url:href,
                             type:"POST",
                             data:{
-                                id:id,
                                 _method:"DELETE"
                             },
                             success:function(){
-                                alert("删除成功");
+                                //alert("删除成功");
+                                window.location.reload();
+                            },
+                            error:function () {
+                                alert("删除失败");
                             }
 
                         }

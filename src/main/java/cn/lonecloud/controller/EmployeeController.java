@@ -2,6 +2,7 @@ package cn.lonecloud.controller;
 
 import cn.lonecloud.dao.EmployeeDao;
 import cn.lonecloud.entity.Employee;
+import cn.lonecloud.util.RandomUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.slf4j.Logger;
@@ -52,22 +53,53 @@ public class EmployeeController {
     @RequestMapping(value = "/update/",method = RequestMethod.PUT)
     public String update(Employee employee){
         employeeDao.update(employee);
-        return "list";
+        return "redirect:/emp/list";
     }
 
+    /**
+     * 显示添加员工的界面
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/emp",method = RequestMethod.GET)
     public String empShow(Model model){
-        model.addAttribute("employee",employeeDao.query());
-        return "list";
+        //不管需不需要如果使用了form标签必须加上
+        model.addAttribute("employee",new Employee());
+        return "input";
     }
+
+    /**
+     * 修改员工的界面
+     * @param employee
+     * @return
+     */
     @RequestMapping(value = "/emp",method = RequestMethod.PUT)
     public String empUpdate(Employee employee){
         employeeDao.update(employee);
-        return "list";
+        return "redirect:/emp/list";
     }
-    @RequestMapping(value = "/emp",method=RequestMethod.DELETE)
+
+    /**
+     * 删除员工的界面
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/emp/{id}",method=RequestMethod.DELETE)
     public String empDelete(@PathVariable("id") String id){
+        logger.debug("delete->>>>>>>>>"+id);
         employeeDao.deleteById(id);
-        return "list";
+        return "redirect:/emp/list";
+    }
+
+    /**
+     * 添加一个人员
+     * @param employee
+     * @return
+     */
+    @RequestMapping(value = "/emp",method=RequestMethod.POST)
+    public String empAdd(Employee employee){
+        employee.setId(RandomUtils.getUUID());
+        employeeDao.insert(employee);
+        return "redirect:/emp/list";
     }
 }
