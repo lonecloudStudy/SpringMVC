@@ -13,10 +13,12 @@
     <title>Title</title>
 </head>
 <body>
-<form action="${ctx}/save" method="post">
-    <input type="text" name="id" readonly>
-    <input type="text" name="name">
-    <input type="text" name="age">
+<form action="${ctx}/emp/update" method="post">
+    <input type="hidden" name="_method" value="PUT">
+    id: <input type="text" name="id" readonly value="${employee.id}"><br>
+    名字: <input type="text" name="name" value="${employee.name}"><br>
+    年龄:<input type="text" name="age" value="${employee.age}"><br>
+    <button type="submit">修改</button>
 </form>
 </body>
 </html>

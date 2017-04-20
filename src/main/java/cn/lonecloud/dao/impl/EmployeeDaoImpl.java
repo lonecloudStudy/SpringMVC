@@ -36,4 +36,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public List<? extends Object> query(Object... args) {
         return args.length != 0 ? DBUtils.query("select id,name,age from employee where id=?", Employee.class, args) : DBUtils.query("select id,name,age from employee", Employee.class);
     }
+    @Override
+    public Employee queryById(String id) {
+        List<?> objects = DBUtils.query("select id,name,age from employee where id=?", Employee.class, id);
+        return objects!=null&&objects.size()!=0?(Employee)objects.get(0):null;
+    }
 }

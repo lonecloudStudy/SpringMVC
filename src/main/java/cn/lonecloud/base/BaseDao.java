@@ -16,4 +16,6 @@ public interface BaseDao<E> {
     public void deleteById(String id);
 
     public List<? extends Object> query(Object... args);
+
+    public E queryById(String id);
 }

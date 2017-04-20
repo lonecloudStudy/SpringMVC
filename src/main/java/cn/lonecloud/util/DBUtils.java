@@ -33,7 +33,8 @@ public class DBUtils {
     }
 
     public static List<? extends Object> query(String sql, Class<? extends Object> clazz, Object... args) {
+
         RowMapper<Employee> rowMapper=new BeanPropertyRowMapper<Employee>(Employee.class);
-        return jdbcTemplate.query(sql,rowMapper);
+        return args.length!=0?jdbcTemplate.query(sql,rowMapper,args):jdbcTemplate.query(sql,rowMapper);
     }
 }
