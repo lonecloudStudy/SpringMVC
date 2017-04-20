@@ -9,15 +9,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * Created by lonecloud on 17/4/16.
+ * @author lonecloud
  */
 @Controller
 @RequestMapping("/emp")
@@ -27,6 +26,18 @@ public class EmployeeController {
 
     @Resource
     private EmployeeDao employeeDao;
+
+    /**
+     * 防止一些未填写的属性被清空
+     * @param id id
+     * @param model model
+     */
+    @ModelAttribute
+    public void getModel(@RequestParam("id") String id, Model model){
+        if (null!=id){
+            model.addAttribute("employee",employeeDao.queryById(id));
+        }
+    }
 
     @RequestMapping("/list")
     public String list(Model model) {
@@ -58,8 +69,8 @@ public class EmployeeController {
 
     /**
      * 显示添加员工的界面
-     * @param model
-     * @return
+     * @param model model
+     * @return view
      */
     @RequestMapping(value = "/emp",method = RequestMethod.GET)
     public String empShow(Model model){
@@ -70,8 +81,8 @@ public class EmployeeController {
 
     /**
      * 修改员工的界面
-     * @param employee
-     * @return
+     * @param employee 人员参数
+     * @return view
      */
     @RequestMapping(value = "/emp",method = RequestMethod.PUT)
     public String empUpdate(Employee employee){
@@ -81,8 +92,8 @@ public class EmployeeController {
 
     /**
      * 删除员工的界面
-     * @param id
-     * @return
+     * @param id id
+     * @return view
      */
     @RequestMapping(value = "/emp/{id}",method=RequestMethod.DELETE)
     public String empDelete(@PathVariable("id") String id){
@@ -93,8 +104,8 @@ public class EmployeeController {
 
     /**
      * 添加一个人员
-     * @param employee
-     * @return
+     * @param employee 人员
+     * @return view
      */
     @RequestMapping(value = "/emp",method=RequestMethod.POST)
     public String empAdd(Employee employee){
