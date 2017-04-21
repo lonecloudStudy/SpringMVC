@@ -89,6 +89,6 @@
         </dependency>
 	</dependencies>
 	<build>
-		<finalName>SprinMvc</finalName>
+		<finalName>SpringMvc</finalName>
 	</build>
 </project>
