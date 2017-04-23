@@ -7,6 +7,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- 一般会将这个注解加上去 -->
 	<mvc:annotation-driven />
+    <!--判断是不是被映射过的js和Servlet-->
 	<mvc:default-servlet-handler />
 	<!-- 启用spring mvc 注解 -->
 	<context:annotation-config />
@@ -36,15 +37,4 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	<!-- 配置国际化资源文件 -->
-	<bean id="resourceBundleMessageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-		<property name="basename" value="I18n"></property>
-	</bean>
-	<!-- 配置直接转发的页面 -->
-	<mvc:view-controller path="/success" view-name="user"/>
-    <!--自定义视图配置-->
-    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
-        <!--设置优先级 InternalResourceViewResolver为Integer.MAXVALUE-->
-        <property name="order" value="100"/>
-    </bean>
 </beans>
